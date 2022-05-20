@@ -12,15 +12,17 @@ export const getImages = createAsyncThunk(
         url = `https://api.unsplash.com/photos/random?client_id=${client_id}&count=20`;
       }
       const response = await axios.get(url);
+      if(query && query.length){
+        return response.data.results;
+      }
       return response.data;
     }
   );
 
   const initialState={
-    searchResults:[],
-    myFavImages:[]
+    searchResults:[]
   }
-  export const allImagesSlice = createSlice({
+  export const allPhotosSlice = createSlice({
     name: 'results',
       initialState,
       reducers: {},
@@ -31,8 +33,8 @@ export const getImages = createAsyncThunk(
       }
   })
 
-  export default allImagesSlice.reducer;
-  export const results = state => state.images.searchResults;
+  export default allPhotosSlice.reducer;
+  export const results = state => state.allPhotos.searchResults;
 
   //RECUERDA MIRIAM MIRARLO EN FAVIMAGES
   // export const results = state => state.images.myFavImages;
