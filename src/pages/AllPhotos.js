@@ -40,18 +40,35 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
 
+  //Función para evitar la llamada a la API con cada tecla en search
+  function useDebounce(value, delay) {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    useEffect(
+      () => {
+        const handler = setTimeout(() => {
+          setDebouncedValue(value);
+        }, delay);
+        return () => {
+          clearTimeout(handler);
+        };
+      },
+      [value, delay]
+    );
+    return debouncedValue;
+  }
+
 export default function AllPhotos(){
     const [query, setQuery] = useState("");
     const dispatch = useDispatch();
     const resultsAPI = useSelector(results);
+    const debouncedSearchTerm = useDebounce(query, 1000);
 
     useEffect(() => {
         dispatch(getImages(query));
-     },[query, dispatch]);
-
+     },[dispatch, debouncedSearchTerm]);
      
-     const theme = useTheme()
-     const isMobile = useMediaQuery(theme.breakpoints.up('sm'))
+    const theme = useTheme()
+    const isMobile = useMediaQuery(theme.breakpoints.up('sm'))
      
     return (
         <>
@@ -84,13 +101,7 @@ export default function AllPhotos(){
                         title={item.likes}
                         position="top"
                         actionIcon={
-                            <Box sx={{fontSize:'x-large'}}>
-                                <IconButton
-                                sx={{ color: 'white' }}
-                                >
-                                <FavoriteBorderIcon />
-                                </IconButton>
-                            </Box>
+                            <FavoriteBorderIcon sx={{fontSize:'x-large', color:'white', margin:2, marginRight:1}} />
                         }
                         actionPosition="left"
                     />

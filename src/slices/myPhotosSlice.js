@@ -1,4 +1,3 @@
-
 import { createSlice } from '@reduxjs/toolkit'
 
 function savePhoto(photo) {
@@ -21,14 +20,17 @@ export const myPhotosSlice = createSlice({
         const newPhoto = {
             date: f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear(),
             id: action.payload.id,
-            description: action.payload.description,
+            description: action.payload.description || "undefined",
             width: action.payload.width,
             height: action.payload.height,
             urlsFull: action.payload.urls.full,
             urlsThumb: action.payload.urls.thumb
         }
-        state.photos.push(newPhoto);
-        savePhoto(state.photos);
+        const photosId = state.photos.map(p => p = p.id);
+        if(!photosId.includes(action.payload.id)){
+          state.photos.push(newPhoto);
+          savePhoto(state.photos);
+        }
     },
     removeFromFavourites: (state, action) => {
         state.photos = state.photos.filter(p => p.id !== action.payload.id);
@@ -39,7 +41,7 @@ export const myPhotosSlice = createSlice({
         newPhotos[action.index].description = action.description;
         state.photos = newPhotos;
         savePhoto(state.photos);
-    },
+    }
   }
 })
 export const { addToFavourites, removeFromFavourites, editDescription } = myPhotosSlice.actions
