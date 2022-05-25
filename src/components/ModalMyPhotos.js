@@ -10,7 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 290,
   bgcolor: 'background.paper',
   border: '3px solid rgb(128,0,64)',
   boxShadow: 24,
@@ -37,6 +37,7 @@ export default function ModalMyPhotos(props) {
   useEffect(() => {
     setOpen(false);
  },[favouritesPhotos]);
+ 
     return (
       <>
         <Modal
@@ -49,8 +50,8 @@ export default function ModalMyPhotos(props) {
                 <CancelPresentationIcon />
               </IconButton>
             <Box sx={{marginTop:5, display:'flex'}}>
-              <img src={currentPhoto.urlsFull} style={{width:250}} alt={currentPhoto.description}/>
-              <Typography id="modal-modal-description" sx={{ mt: 2, marginLeft:2 }}>
+              <Box><img src={currentPhoto.urlsFull} style={{width:150}} alt={currentPhoto.description}/></Box>
+              <Typography id="modal-modal-description" sx={{ marginLeft:2 }}>
                 <span style={{color:'rgb(128,0,64)'}}>Id image: </span>{currentPhoto.id}<br/>
                 <span style={{color:'rgb(128,0,64)'}}>Likes:</span> {currentPhoto.likes}<br/>
                 <span style={{color:'rgb(128,0,64)'}}>Width:</span> {currentPhoto.width}<br/>

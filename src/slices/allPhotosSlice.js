@@ -1,3 +1,4 @@
+import { TurnedIn } from '@mui/icons-material';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -20,7 +21,7 @@ export const getImages = createAsyncThunk(
   );
 
   const initialState={
-    searchResults:[]
+    searchResults:[],
   }
   export const allPhotosSlice = createSlice({
     name: 'results',
@@ -29,13 +30,10 @@ export const getImages = createAsyncThunk(
       extraReducers(builder) {
           builder.addCase(getImages.fulfilled, (state, action) => {
               state.searchResults = action.payload;
+              state.isLoading = false;
           })
       }
   })
 
   export default allPhotosSlice.reducer;
   export const results = state => state.allPhotos.searchResults;
-
-  //RECUERDA MIRIAM MIRARLO EN FAVIMAGES
-  // export const results = state => state.images.myFavImages;
-  // export const results = state => state.results.myFavImages;

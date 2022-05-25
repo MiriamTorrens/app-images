@@ -7,7 +7,6 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Box, ImageList, ImageListItem, ImageListItemBar, IconButton, TextField,  useTheme, useMediaQuery, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { SignalCellularNoSimOutlined } from "@mui/icons-material";
 const FileSaver = require('file-saver');
 
 export default function MyPhotos(){
@@ -53,6 +52,7 @@ export default function MyPhotos(){
     const handleChange = (order) => {
         setOrder(order);
         const newPhotos = [...favouritesPhotos];
+        // no funciona newPhotos.sort((a,b) => a.order - b.order);
         switch(order){
             case 'date':
                 newPhotos.sort((a,b) => a.date - b.date);  
@@ -64,7 +64,7 @@ export default function MyPhotos(){
                 newPhotos.sort((a,b) => a.height - b.height);  
                 break;
             case 'likes':
-                newPhotos.sort((a,b) => a.likes - b.likes);  
+                newPhotos.sort((a,b) => b.likes - a.likes);  
                 break;
             default:
                 return newPhotos;
@@ -79,8 +79,8 @@ export default function MyPhotos(){
                     label="Search"
                     value={query}
                     onChange={(e) => handleChangeSearch(e.target.value)}
-                    sx={{width:'35%'}}/>
-                <FormControl fullWidth sx={{width:'10%'}}>
+                    sx={{width:{xs:'50%', sm:'35%'}, backgroundColor:'white'}}/>
+                <FormControl fullWidth sx={{width:{xs:'30%', sm:'10%'}, backgroundColor:'white'}}>
                     <InputLabel>Order</InputLabel>
                     <Select
                         value={order}
@@ -95,7 +95,7 @@ export default function MyPhotos(){
                 </FormControl>
             </Box>
             <Box sx={{width: '80%', margin:'0 auto', display:'flex'}}>
-                <ImageList cols={isMobile? 4:1} gap={20} sx={{margin:'0 auto', marginTop:5 }}>
+                <ImageList cols={isMobile? 4:1} gap={20} sx={{margin:'0 auto', marginTop:5, marginBottom:10 }}>
                     {myPhotos && myPhotos.length && myPhotos.map((item) => (
                         <ImageListItem key={item.id}>
                             <img

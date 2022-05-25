@@ -7,6 +7,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
 import { addToFavourites } from "../slices/myPhotosSlice";
+import{ NavLink } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -109,9 +110,11 @@ export default function AllPhotos(){
                     title={'Author: '+item.user.name}
                     subtitle={item.user.social.instagram_username}
                     actionIcon={
-                    <IconButton sx={{ color: 'white' }} onClick={() => dispatch(addToFavourites(item))}>
-                       <Typography variant='h5'>Add</Typography><AddPhotoAlternateIcon  sx={{fontSize:'xxx-large'}} />
-                    </IconButton>
+                      <NavLink to='/MyPhotos' style={{textDecoration:'none'}}>
+                        <IconButton sx={{ color: 'white' }} onClick={() => dispatch(addToFavourites(item))}>
+                          <Typography variant='h5'>Add</Typography><AddPhotoAlternateIcon  sx={{fontSize:'xxx-large'}} />
+                        </IconButton>
+                      </NavLink>
                     }
                     />
                 </ImageListItem>
