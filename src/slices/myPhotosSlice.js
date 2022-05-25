@@ -20,6 +20,7 @@ export const myPhotosSlice = createSlice({
         const newPhoto = {
             date: f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear(),
             id: action.payload.id,
+            likes: action.payload.likes,
             description: action.payload.description || "undefined",
             width: action.payload.width,
             height: action.payload.height,
@@ -38,7 +39,8 @@ export const myPhotosSlice = createSlice({
     },
     editDescription: (state, action) => {
         const newPhotos = [...state.photos];
-        newPhotos[action.index].description = action.description;
+        const index = newPhotos.findIndex(p => p.id === action.payload.id)
+        newPhotos[index].description = action.payload.description;
         state.photos = newPhotos;
         savePhoto(state.photos);
     }

@@ -1,29 +1,30 @@
 import { favourites } from "../slices/myPhotosSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import BasicModal from "../components/MyModal";
-import { removeFromFavourites, editDescription } from "../slices/myPhotosSlice";
+import ModalMyPhotos from "../components/ModalMyPhotos";
+import { removeFromFavourites } from "../slices/myPhotosSlice";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Box, ImageList, ImageListItem, ImageListItemBar, IconButton, TextField,  useTheme, useMediaQuery, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-
+import { SignalCellularNoSimOutlined } from "@mui/icons-material";
+const FileSaver = require('file-saver');
 
 export default function MyPhotos(){
     const dispatch = useDispatch();
     const [query, setQuery] = useState("");
-    const [order,setOrder] = useState("");
+    const [order, setOrder] = useState("");
     const favouritesPhotos = useSelector(favourites);
     const [myPhotos, setMyPhotos] = useState(favouritesPhotos);
     const [open, setOpen] = useState(false);
-    const [description, setDescription] = useState("")
+    const [currentPhoto, setCurrentPhoto] = useState({});
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
 
     //Buscar por descripción
     function searchTerm(query){
-        if(query !== ""){
+        if(query && query.length){
             const filter = favouritesPhotos.filter(photo => photo.description.toLowerCase().includes(query));
             setMyPhotos(filter);
         }else{
@@ -35,24 +36,42 @@ export default function MyPhotos(){
         searchTerm(value);
     };
 
-    //Actualizar lista de imágenes al eliminar una foto
+    //Actualizar lista de imágenes 
     useEffect(() => {
         setMyPhotos(favouritesPhotos);
      },[favouritesPhotos]);
+
     
     //Modificar la descripcion
-    //const handleOpenModal = () => setOpen(true);
     const OpenModal = () => setOpen(true);
     const handleChangeDescription = (photo) => {
         OpenModal();
-        setDescription(photo.description);
+        setCurrentPhoto(photo);
     }
    
     //Ordenar las fotos
-    const handleChange = (event) => {
-        setOrder(event.target.value);
+    const handleChange = (order) => {
+        setOrder(order);
+        const newPhotos = [...favouritesPhotos];
+        switch(order){
+            case 'date':
+                newPhotos.sort((a,b) => a.date - b.date);  
+                break;
+            case 'width': 
+                newPhotos.sort((a,b) => a.width - b.width);  
+                break;
+            case 'height':
+                newPhotos.sort((a,b) => a.height - b.height);  
+                break;
+            case 'likes':
+                newPhotos.sort((a,b) => a.likes - b.likes);  
+                break;
+            default:
+                return newPhotos;
+        }
+        setMyPhotos(newPhotos);
     };
-
+   
     return (
         <>
             <Box sx={{ marginTop:5, display:'flex', width:'100%', justifyContent:'center' }}>
@@ -66,7 +85,7 @@ export default function MyPhotos(){
                     <Select
                         value={order}
                         label="Order"
-                        onChange={handleChange} 
+                        onChange={(e) => handleChange(e.target.value)} 
                     >
                         <MenuItem value='date'>Date</MenuItem>
                         <MenuItem value='width'>Width</MenuItem>
@@ -87,7 +106,7 @@ export default function MyPhotos(){
                             actionIcon={
                                 <>
                                     <IconButton sx={{ color: 'white' }} onClick={() => handleChangeDescription(item)}><EditIcon sx={{fontSize:'xx-large'}} /></IconButton>
-                                    <IconButton sx={{ color: 'white' }}><DownloadIcon sx={{fontSize:'xx-large'}} /></IconButton>
+                                    <IconButton sx={{ color: 'white' }} onClick={() => FileSaver.saveAs(item.urlsFull, "image")}><DownloadIcon sx={{fontSize:'xx-large'}} /></IconButton>
                                     <IconButton sx={{ color: 'white' }} onClick={() => dispatch(removeFromFavourites(item))}><DeleteOutlineIcon sx={{fontSize:'xx-large'}} /></IconButton>
                                 </>
                             }
@@ -96,8 +115,7 @@ export default function MyPhotos(){
                     ))} 
                 </ImageList>
             </Box>
-            <BasicModal open={open} setOpen={setOpen} description={description} setDescription={setDescription}/>
+            <ModalMyPhotos open={open} setOpen={setOpen} currentPhoto={currentPhoto} setCurrentPhoto={setCurrentPhoto} />
         </>
-
     )
 }
