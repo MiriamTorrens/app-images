@@ -52,7 +52,6 @@ export default function MyPhotos(){
     const handleChange = (order) => {
         setOrder(order);
         const newPhotos = [...favouritesPhotos];
-        // no funciona newPhotos.sort((a,b) => a.order - b.order);
         switch(order){
             case 'date':
                 newPhotos.sort((a,b) => a.date - b.date);  
@@ -106,7 +105,7 @@ export default function MyPhotos(){
                             actionIcon={
                                 <>
                                     <IconButton sx={{ color: 'white' }} onClick={() => handleChangeDescription(item)}><EditIcon sx={{fontSize:'xx-large'}} /></IconButton>
-                                    <IconButton sx={{ color: 'white' }} onClick={() => FileSaver.saveAs(item.urlsFull, "image")}><DownloadIcon sx={{fontSize:'xx-large'}} /></IconButton>
+                                    <IconButton sx={{ color: 'white' }} onClick={() => FileSaver.saveAs(item.urlsFull, item.description)}><DownloadIcon sx={{fontSize:'xx-large'}} /></IconButton>
                                     <IconButton sx={{ color: 'white' }} onClick={() => dispatch(removeFromFavourites(item))}><DeleteOutlineIcon sx={{fontSize:'xx-large'}} /></IconButton>
                                 </>
                             }

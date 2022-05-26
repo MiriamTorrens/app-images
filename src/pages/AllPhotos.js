@@ -111,7 +111,7 @@ export default function AllPhotos(){
                     subtitle={item.user.social.instagram_username}
                     actionIcon={
                       <NavLink to='/MyPhotos' style={{textDecoration:'none'}}>
-                        <IconButton sx={{ color: 'white' }} onClick={() => dispatch(addToFavourites(item))}>
+                        <IconButton sx={{ color: 'white'}} onClick={() => dispatch(addToFavourites(item))}>
                           <Typography variant='h5'>Add</Typography><AddPhotoAlternateIcon  sx={{fontSize:'xxx-large'}} />
                         </IconButton>
                       </NavLink>

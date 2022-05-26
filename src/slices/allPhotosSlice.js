@@ -30,7 +30,6 @@ export const getImages = createAsyncThunk(
       extraReducers(builder) {
           builder.addCase(getImages.fulfilled, (state, action) => {
               state.searchResults = action.payload;
-              state.isLoading = false;
           })
       }
   })
