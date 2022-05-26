@@ -8,9 +8,9 @@ function App() {
   return (
     <>
       <Header/>
-      <AllPhotos/>
         <Routes>
           <Route path='/' element={<AllPhotos/>}/>
+          <Route path='/dashboard' element={<AllPhotos/>}/>
           <Route path='myPhotos' element={<MyPhotos/>}/>
         </Routes>
       <Footer/>
