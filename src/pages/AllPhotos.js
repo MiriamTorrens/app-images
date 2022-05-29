@@ -41,7 +41,7 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
 
-  //Función para evitar la llamada a la API con cada tecla en search
+  //Función para retrasar la llamada a la API al buscar 
   function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
     useEffect(
@@ -68,9 +68,10 @@ export default function AllPhotos(){
         dispatch(getImages(query));
      },[dispatch, debouncedSearchTerm]);
      
-    const theme = useTheme()
-    const isMobile = useMediaQuery(theme.breakpoints.up('sm'))
-     
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
+
+
     return (
         <>
             <Search>

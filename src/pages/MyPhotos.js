@@ -71,9 +71,17 @@ export default function MyPhotos(){
         setMyPhotos(newPhotos);
     };
    
+    //Situar el footer
+    let height;
+    if(window.innerHeight < 700){
+        myPhotos.length ? height = 'auto' : height = window.innerHeight;
+    }else{
+        myPhotos.length > 4 ? height = 'auto' : height = window.innerHeight;
+    }
+    
     return (
-        <>
-            <Box sx={{ marginTop:5, display:'flex', width:'100%', justifyContent:'center' }}>
+        <Box sx={{minHeight:{height}}} >
+            <Box sx={{ marginTop:5, display:'flex', width:'100%', justifyContent:'center'}}>
                 <TextField
                     label="Search"
                     value={query}
@@ -115,6 +123,6 @@ export default function MyPhotos(){
                 </ImageList>
             </Box>
             <ModalMyPhotos open={open} setOpen={setOpen} currentPhoto={currentPhoto} setCurrentPhoto={setCurrentPhoto} />
-        </>
+        </Box>
     )
 }

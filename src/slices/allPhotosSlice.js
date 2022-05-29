@@ -1,4 +1,3 @@
-import { TurnedIn } from '@mui/icons-material';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -36,3 +35,4 @@ export const getImages = createAsyncThunk(
 
   export default allPhotosSlice.reducer;
   export const results = state => state.allPhotos.searchResults;
+
