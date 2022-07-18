@@ -5,7 +5,6 @@ import myPhotosReducer from '../slices/myPhotosSlice'
 
 export const store = configureStore({
   reducer: {
-    // counter: counterReducer,
     allPhotos:allPhotosReducer,
     myPhotos: myPhotosReducer
   },

@@ -71,7 +71,6 @@ export default function AllPhotos(){
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
 
-
     return (
         <>
             <Search>

@@ -1,7 +1,7 @@
 {
   "name": "dashboard-app",
   "version": "0.1.0",
-  "homepage": "https://miriamtorrens.github.io/dashboard/",
+  "homepage": "https://github.com/MiriamTorrens/app-images",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": [
