@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/MiriamTorrens/app-images/static/css/main.4df8054a.css",
-    "main.js": "/MiriamTorrens/app-images/static/js/main.5f34e739.js",
+    "main.js": "/MiriamTorrens/app-images/static/js/main.6f3db7b0.js",
     "static/js/787.92af229c.chunk.js": "/MiriamTorrens/app-images/static/js/787.92af229c.chunk.js",
     "index.html": "/MiriamTorrens/app-images/index.html",
     "main.4df8054a.css.map": "/MiriamTorrens/app-images/static/css/main.4df8054a.css.map",
-    "main.5f34e739.js.map": "/MiriamTorrens/app-images/static/js/main.5f34e739.js.map",
+    "main.6f3db7b0.js.map": "/MiriamTorrens/app-images/static/js/main.6f3db7b0.js.map",
     "787.92af229c.chunk.js.map": "/MiriamTorrens/app-images/static/js/787.92af229c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4df8054a.css",
-    "static/js/main.5f34e739.js"
+    "static/js/main.6f3db7b0.js"
   ]
 }
