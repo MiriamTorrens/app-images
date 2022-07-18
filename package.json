@@ -1,7 +1,7 @@
 {
-  "name": "dashboard-app",
+  "name": "images-app",
   "version": "0.1.0",
-  "homepage": "https://github.com/MiriamTorrens/app-images",
+  "homepage": "https://miriamtorrens.github.io/app-images/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
