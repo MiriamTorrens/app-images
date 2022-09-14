@@ -1,12 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 // import counterReducer from '../features/counter/counterSlice';
-import allPhotosReducer from '../slices/allPhotosSlice';
-import myPhotosReducer from '../slices/myPhotosSlice'
+import searchReducer from "../slices/searchSlice";
+import collectionSlice from "../slices/collectionSlice";
 
 export const store = configureStore({
   reducer: {
-    allPhotos:allPhotosReducer,
-    myPhotos: myPhotosReducer
+    allPhotos: searchReducer,
+    myPhotos: collectionSlice,
   },
-  middleware: getDefaultMiddleware =>  getDefaultMiddleware({    serializableCheck: false,  })
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });

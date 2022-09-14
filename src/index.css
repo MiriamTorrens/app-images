@@ -1,6 +1,57 @@
-body {
-  margin: 0;
-  background-color: rgb(255,236,245);
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
+:root{
+  --main-color: rgb(136, 210, 208);
 }
-
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* overflow-x: hidden; */
+}
+body{
+  background-color: rgba(158, 237, 234, .2);
+  min-width: 320px;
+}
+a{
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.swiper-button-prev::after{
+  color: white;
+  margin-left: 6vw;
+}
+.swiper-button-next::after {
+  color: white;
+  margin-right: 6vw;
+}
+.title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 30px auto;
+  width: 100%;
+  height: 80vh;
+  position: absolute;
+  z-index: 1;
+  color: white;
+  font-size: 3vw;
+  background-color: rgba(0, 0, 0, .4);
+}
+.color{
+  color: var(--main-color);
+}
+.slider{
+  z-index: 0;
+}
+.link:hover{
+  color: var(--main-color);
+}
+.spanModal{
+  font-weight: bold;
+  color: var(--main-color);
+}
+.hover:hover{
+  color: var(--main-color)
+}
